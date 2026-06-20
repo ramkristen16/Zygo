@@ -35,8 +35,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   void _finishOnboarding() {
-    // Une fois la route de connexion créée :
-    // context.go('/login');
+
     debugPrint('Navigation vers le Login !');
   }
 
@@ -95,7 +94,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           TextButton(
             onPressed: _finishOnboarding,
             child: Text(
-              'skip and log in',
+              'Déjà inscrit ?',
               style: AppTextStyle.body3.copyWith(
                 color: AppColors.primaryNavyBlue.withOpacity(0.6),
               ),
@@ -114,15 +113,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   List<TextSpan> _titlePage1() => [
-    TextSpan(text: 'End', style: _titleStyle(bold: true)),
-    TextSpan(text: ' time waste\n', style: _titleStyle(bold: false)),
-    TextSpan(text: 'effortlessly', style: _titleStyle(bold: true)),
+    TextSpan(text: 'Gagnez', style: _titleStyle(bold: true)),
+    TextSpan(text: ' du temps,\n', style: _titleStyle(bold: false)),
+    TextSpan(text: 'sans effort', style: _titleStyle(bold: true)),
   ];
 
   List<TextSpan> _titlePage2() => [
-    TextSpan(text: 'Best price', style: _titleStyle(bold: true)),
-    TextSpan(text: ' for\n', style: _titleStyle(bold: false)),
-    TextSpan(text: 'you', style: _titleStyle(bold: false)),
+    TextSpan(text: 'Meilleur prix', style: _titleStyle(bold: true)),
+    TextSpan(text: ' pour\n', style: _titleStyle(bold: false)),
+    TextSpan(text: 'vous', style: _titleStyle(bold: false)),
   ];
 
   TextStyle _titleStyle({required bool bold}) {
@@ -133,16 +132,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   List<TextSpan> _descriptionPage1() => [
     const TextSpan(
-      text: 'Because of the buses or traffic? End all of that with Zygo.',
+      text: "À cause des bus ou des embouteillages ? Avec Zygo, c'est terminé.",
     ),
   ];
 
   List<TextSpan> _descriptionPage2() => [
-    const TextSpan(text: 'No more expensive taxi. Our '),
-    TextSpan(text: 'intelligent', style: _descriptionBoldStyle()),
-    const TextSpan(text: ' application '),
-    TextSpan(text: 'calculates', style: _descriptionBoldStyle()),
-    const TextSpan(text: " the best price for everyone's needs."),
+    const TextSpan(text: 'Fini les taxis chers. Notre application '),
+    TextSpan(text: 'intelligente', style: _descriptionBoldStyle()),
+    const TextSpan(text: ' '),
+    TextSpan(text: 'calcule', style: _descriptionBoldStyle()),
+    const TextSpan(text: ' le meilleur prix pour chacun.'),
   ];
 
   TextStyle _descriptionBoldStyle() {
@@ -186,7 +185,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ? Align(
         alignment: Alignment.centerRight,
         child: _buildPillButton(
-          label: 'How about price !',
+          label: 'Et le prix alors ?',
           onPressed: _goToNextPage,
         ),
       )
@@ -196,14 +195,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           TextButton(
             onPressed: _finishOnboarding,
             child: Text(
-              'Skip',
+              'Passer',
               style: AppTextStyle.buttonLinkMedium.copyWith(
                 color: AppColors.primary,
               ),
             ),
           ),
           _buildPillButton(
-            label: "Let's start",
+            label: "C'est parti",
             onPressed: _finishOnboarding,
           ),
         ],
