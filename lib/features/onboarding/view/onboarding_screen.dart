@@ -66,14 +66,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 24.0,
-              vertical: 12.0,
+              vertical:
+                  8.0, // Réduit légèrement pour gagner de l'espace vertical
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // 1. En-tête dynamique
                 _buildHeader(),
-                const SizedBox(height: 12),
+                const SizedBox(height: 8),
 
                 // 2. Zone d'affichage PageView (Images + Textes)
                 Expanded(
@@ -92,7 +93,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 8),
 
                 // 3. Pied de page dynamique
                 _buildFooter(),
@@ -144,34 +145,35 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 20),
+          const SizedBox(height: 86), // Espacement réduit
           Center(
             child: SvgPicture.asset(
               'assets/image/onboarding1.svg',
-              height: screenHeight * 0.25,
+              height: screenHeight * 0.35,
               fit: BoxFit.contain,
             ),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(
+            height: 12,
+          ), // Espacement resserré entre illustration et texte
           Text(
-            'Gagnez du temps,\nsans effort',
-            style: GoogleFonts.lexend(
-              fontSize: 26,
+            'GAGNEZ DU TEMPS,\nSANS EFFORT',
+            style: AppTextStyle.onboardingTitle.copyWith(
               fontWeight: FontWeight.w700,
               color: AppColors.primaryNavyBlue,
-              height: 1.2,
+              fontSize: 26, // Texte plus compact pour éviter l'encombrement
+              height: 1.15,
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 8),
           Text(
-            'À cause des bus ou des embouteillages ?\nAvec Zygo, c\'est terminé.',
-            style: GoogleFonts.lexend(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
+            'Problèmes de transport?\nAvec Zygo, c\'est terminé.',
+            style: AppTextStyle.body2.copyWith(
               color: AppColors.primaryNavyBlue.withValues(alpha: 0.6),
               height: 1.4,
             ),
           ),
+          const SizedBox(height: 16),
         ],
       ),
     );
@@ -184,46 +186,45 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 20),
+          const SizedBox(height: 86), // Espacement réduit
           Center(
             child: SvgPicture.asset(
               'assets/image/onboarding2.svg',
-              height: screenHeight * 0.25,
+              height: screenHeight * 0.32,
               fit: BoxFit.contain,
             ),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 16), // Espacement resserré
           Text(
             'LE MEILLEUR PRIX,\nPOUR VOUS',
-            style: GoogleFonts.lexend(
-              fontSize: 24,
+            style: AppTextStyle.onboardingTitle.copyWith(
               fontWeight: FontWeight.w900,
               color: AppColors.primaryNavyBlue,
-              height: 1.2,
+              fontSize: 24, // Texte plus compact
               letterSpacing: -0.5,
+              height: 1.15,
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 8),
           Text.rich(
             TextSpan(
-              style: GoogleFonts.lexend(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
+              style: AppTextStyle.body2.copyWith(
                 color: AppColors.primaryNavyBlue.withValues(alpha: 0.6),
                 height: 1.4,
               ),
               children: [
-                const TextSpan(
-                  text: 'Fini les taxis chers. Notre application ',
-                ),
+                const TextSpan(text: 'Fini les taxis chers. '),
                 TextSpan(
-                  text: 'intelligente calcule',
-                  style: GoogleFonts.lexend(fontWeight: FontWeight.w700),
+                  text: 'Négociez',
+                  style: AppTextStyle.body2.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
-                const TextSpan(text: ' le meilleur prix pour chacun.'),
+                const TextSpan(text: ' en toute transparence.'),
               ],
             ),
           ),
+          const SizedBox(height: 16),
         ],
       ),
     );
@@ -236,55 +237,59 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 20),
+          const SizedBox(height: 86), // Espacement réduit
           Center(
             child: SvgPicture.asset(
               'assets/image/logo.svg',
-              height: screenHeight * 0.22,
+              height: screenHeight * 0.22, // Hauteur ajustée
               fit: BoxFit.contain,
             ),
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 36), // Espacement resserré
           Text.rich(
             TextSpan(
-              style: GoogleFonts.lexend(
-                fontSize: 26,
+              style: AppTextStyle.onboardingTitle.copyWith(
                 color: AppColors.primaryNavyBlue,
-                height: 1.2,
+                fontSize: 26, // Taille de titre plus mesurée
+                height: 1.15,
               ),
               children: [
-                const TextSpan(
-                  text: 'Même trajet,\n',
-                  style: TextStyle(fontWeight: FontWeight.w400),
+                TextSpan(
+                  text: 'MÊME TRAJET,\n',
+                  style: AppTextStyle.onboardingTitle.copyWith(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 26,
+                  ),
                 ),
                 TextSpan(
-                  text: 'une voiture.',
-                  style: GoogleFonts.lexend(fontWeight: FontWeight.w700),
+                  text: 'UN VÉHICULE.',
+                  style: AppTextStyle.onboardingTitle.copyWith(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 26,
+                  ),
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 8),
           Text.rich(
             TextSpan(
-              style: GoogleFonts.lexend(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
+              style: AppTextStyle.body2.copyWith(
                 color: AppColors.primaryNavyBlue.withValues(alpha: 0.6),
                 height: 1.4,
               ),
               children: [
                 TextSpan(
-                  text: 'Trouvez',
-                  style: GoogleFonts.lexend(fontWeight: FontWeight.w700),
+                  text: 'Partagez',
+                  style: AppTextStyle.body2.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
-                const TextSpan(
-                  text:
-                      ' des personnes partageant votre trajet, où que vous soyez.',
-                ),
+                const TextSpan(text: ' votre trajet, où que vous soyez.'),
               ],
             ),
           ),
+          const SizedBox(height: 16),
         ],
       ),
     );
@@ -296,6 +301,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          // Bouton "Passer" (gauche, gris clair)
           ElevatedButton(
             onPressed: _finishOnboarding,
             style: ElevatedButton.styleFrom(
@@ -309,20 +315,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
             child: Text(
               'Passer',
-              style: GoogleFonts.lexend(
-                fontSize: 14,
+              style: AppTextStyle.buttonLinkMedium.copyWith(
                 fontWeight: FontWeight.w600,
                 color: AppColors.primaryNavyBlue,
               ),
             ),
           ),
+          // Bouton d'action (droite, jaune)
           ElevatedButton(
             onPressed: _nextPage,
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primary,
               foregroundColor: AppColors.textOnYellow,
               elevation: 0,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
@@ -332,8 +338,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               children: [
                 Text(
                   _currentPage == 0 ? 'Et le prix alors ?' : 'C\'est parti',
-                  style: GoogleFonts.lexend(
-                    fontSize: 14,
+                  style: AppTextStyle.buttonLinkMedium.copyWith(
                     fontWeight: FontWeight.w700,
                     color: AppColors.textOnYellow,
                   ),
@@ -350,7 +355,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         ],
       );
     } else {
-      // Boutons spécifiques empilés pour le dernier écran (Hauteur ajustée à 48)
+      // Boutons spécifiques empilés pour le dernier écran
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -379,8 +384,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   const SizedBox(width: 8),
                   Text(
                     'Passager',
-                    style: GoogleFonts.lexend(
-                      fontSize: 14,
+                    style: AppTextStyle.buttonLinkMedium.copyWith(
                       fontWeight: FontWeight.w700,
                       color: AppColors.textOnYellow,
                     ),
@@ -421,8 +425,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   const SizedBox(width: 8),
                   Text(
                     'Conducteur',
-                    style: GoogleFonts.lexend(
-                      fontSize: 14,
+                    style: AppTextStyle.buttonLinkMedium.copyWith(
                       fontWeight: FontWeight.w700,
                       color: AppColors.yellowB40,
                     ),
@@ -445,8 +448,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               onPressed: () => context.go('/login'),
               child: Text(
                 'Se connecter',
-                style: GoogleFonts.lexend(
-                  fontSize: 14,
+                style: AppTextStyle.buttonLinkMedium.copyWith(
                   fontWeight: FontWeight.w600,
                   color: AppColors.primaryNavyBlue,
                 ),

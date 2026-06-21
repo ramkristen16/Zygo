@@ -30,7 +30,7 @@ class AppColors {
   static const Color inputBoxYellow = Color(0xFFFFF9D9);
 
   //  Bleu (secondaire / accents)
-  static const Color blueGrey = Color(0xFF99BBE1); // nommé "grey" dans Figma
+  static const Color blueGrey = Color(0xFF99BBE1); // grey
   static const Color textOnBlue = Color(0xFF002248); // "BLACK BLEU"
   static const Color lightBlue = Color(0xFFEDF3FA);
   static const Color blueL80 = Color(0xFFD9E6F4);

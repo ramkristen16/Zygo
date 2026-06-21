@@ -37,11 +37,14 @@ class SignUpScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // En-tête
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      onPressed: () => context.go('/personal-name'),
+                      onPressed: () => context.go(
+                        '/personal-name',
+                      ), // Retourne à l'écran du nom
                       icon: const Icon(
                         Iconsax.arrow_left_2,
                         size: 28,
@@ -55,7 +58,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 24),
 
                 Expanded(
                   child: SingleChildScrollView(
@@ -65,43 +68,29 @@ class SignUpScreen extends StatelessWidget {
                       children: [
                         Text(
                           'Créez-vous\nun compte',
-                          style: GoogleFonts.lexend(
-                            fontSize: 28,
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.primaryNavyBlue,
-                            height: 1.2,
+                          style: AppTextStyle.h1.copyWith(
+                            fontSize: 32, // Taille spécifique pour ce titre
+                            height: 1.15,
                           ),
                         ),
-                        const SizedBox(height: 24),
-
-                        // Champ Email
+                        const SizedBox(height: 28), // Espace après le titre
+                        // Email
                         _buildLabel('Email'),
                         const SizedBox(height: 6),
-                        _buildTextField(
-                          hintText: '@gmail.com',
-                          icon: Iconsax.sms,
-                        ),
+                        _buildTextField(hintText: '@gmail.com'),
                         const SizedBox(height: 16),
 
-                        // Champ Mot de passe
+                        // Mot de passe
                         _buildLabel('Mot de passe'),
                         const SizedBox(height: 6),
-                        _buildTextField(
-                          hintText: '*******',
-                          icon: Iconsax.lock,
-                          isPassword: true,
-                        ),
+                        _buildTextField(hintText: '*******', isPassword: true),
                         const SizedBox(height: 16),
 
-                        // Champ Confirmer Mot de passe
+                        // Confirmation Mot de passe
                         _buildLabel('Confirmez le mot de passe'),
                         const SizedBox(height: 6),
-                        _buildTextField(
-                          hintText: '*******',
-                          icon: Iconsax.lock,
-                          isPassword: true,
-                        ),
-                        const SizedBox(height: 24),
+                        _buildTextField(hintText: '*******', isPassword: true),
+                        const SizedBox(height: 28),
 
                         // Bouton principal S'inscrire
                         SizedBox(
@@ -119,8 +108,7 @@ class SignUpScreen extends StatelessWidget {
                             ),
                             child: Text(
                               'S\'inscrire',
-                              style: GoogleFonts.lexend(
-                                fontSize: 14,
+                              style: AppTextStyle.buttonLinkMedium.copyWith(
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
@@ -128,7 +116,7 @@ class SignUpScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 16),
 
-                        // Divider "ou"
+                        // Séparateur
                         Row(
                           children: [
                             Expanded(
@@ -144,8 +132,7 @@ class SignUpScreen extends StatelessWidget {
                               ),
                               child: Text(
                                 'ou',
-                                style: GoogleFonts.lexend(
-                                  fontSize: 13,
+                                style: AppTextStyle.body3.copyWith(
                                   color: AppColors.primaryNavyBlue.withValues(
                                     alpha: 0.4,
                                   ),
@@ -163,7 +150,7 @@ class SignUpScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 16),
 
-                        // Connexion Google
+                        // Bouton Google
                         SizedBox(
                           width: double.infinity,
                           height: 48,
@@ -189,8 +176,7 @@ class SignUpScreen extends StatelessWidget {
                                 const SizedBox(width: 8),
                                 Text(
                                   'Continuer avec google',
-                                  style: GoogleFonts.lexend(
-                                    fontSize: 14,
+                                  style: AppTextStyle.buttonLinkMedium.copyWith(
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -203,21 +189,20 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
 
-                // Pied de page
+                // Bas de page (Lien)
                 Center(
                   child: TextButton(
                     onPressed: () => context.go('/login'),
                     child: Text.rich(
                       TextSpan(
-                        style: GoogleFonts.lexend(
-                          fontSize: 14,
+                        style: AppTextStyle.body2.copyWith(
                           color: AppColors.primaryNavyBlue,
                         ),
                         children: [
                           const TextSpan(text: 'Déjà un compte ? '),
                           TextSpan(
                             text: 'Connectez-vous',
-                            style: GoogleFonts.lexend(
+                            style: AppTextStyle.body2.copyWith(
                               fontWeight: FontWeight.w700,
                               color: AppColors.primary,
                             ),
@@ -238,37 +223,24 @@ class SignUpScreen extends StatelessWidget {
   Widget _buildLabel(String text) {
     return Text(
       text,
-      style: GoogleFonts.lexend(
-        fontSize: 13,
-        fontWeight: FontWeight.w600,
+      style: AppTextStyle.label.copyWith(
         color: AppColors.primaryNavyBlue.withValues(alpha: 0.8),
       ),
     );
   }
 
-  Widget _buildTextField({
-    required String hintText,
-    required IconData icon,
-    bool isPassword = false,
-  }) {
+  Widget _buildTextField({required String hintText, bool isPassword = false}) {
     return TextField(
       obscureText: isPassword,
-      style: GoogleFonts.lexend(fontSize: 14, color: AppColors.primaryNavyBlue),
+      style: AppTextStyle.input,
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: GoogleFonts.lexend(
-          color: AppColors.primaryNavyBlue.withValues(alpha: 0.3),
-        ),
-        prefixIcon: Icon(
-          icon,
-          color: AppColors.primaryNavyBlue.withValues(alpha: 0.4),
-          size: 20,
-        ),
+        hintStyle: AppTextStyle.input.copyWith(color: const Color(0xFF94A3B8)),
         filled: true,
         fillColor: AppColors.primaryNavyBlue.withValues(alpha: 0.05),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
-          vertical: 14,
+          vertical: 16,
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),

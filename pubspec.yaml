@@ -1,4 +1,4 @@
-name: untitled
+name: zygo
 description: "A new Flutter project."
 
 publish_to: 'none'
@@ -18,11 +18,17 @@ dependencies:
   iconsax_plus: ^1.0.0
   iconsax_flutter: ^1.0.1
   iconsax: ^0.0.8
+  flutter_launcher_icons: ^0.14.4
+  flutter_lints: ^6.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^6.0.0
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/image/logo.png"
+  remove_alpha_ios: true
 
 flutter:
   uses-material-design: true
@@ -30,6 +36,7 @@ flutter:
     - assets/image/logo.svg
     - assets/image/onboarding1.svg
     - assets/image/onboarding2.svg
+    - assets/image/google.svg
     - assets/fonts/Lexend-Black.ttf
     - assets/fonts/Lexend-Bold.ttf
     - assets/fonts/Lexend-ExtraBold.ttf

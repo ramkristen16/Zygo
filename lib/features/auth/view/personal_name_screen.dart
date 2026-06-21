@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iconsax/iconsax.dart'; // Import d'Iconsax
+import 'package:iconsax/iconsax.dart';
 
 import '../../../core/app_colors.dart';
 import '../../../core/app_text_styles.dart';
@@ -51,7 +51,7 @@ class _PersonalNameScreenState extends State<PersonalNameScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // En-tête avec flèche retour Iconsax
+                // En-tête avec flèche retour Iconsax et logo
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -64,7 +64,7 @@ class _PersonalNameScreenState extends State<PersonalNameScreen> {
                         }
                       },
                       icon: const Icon(
-                        Iconsax.arrow_left_2, // Utilisation d'Iconsax
+                        Iconsax.arrow_left_2,
                         size: 28,
                         color: AppColors.primaryNavyBlue,
                       ),
@@ -76,7 +76,7 @@ class _PersonalNameScreenState extends State<PersonalNameScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 32), // Espace après l'en-tête
 
                 Expanded(
                   child: SingleChildScrollView(
@@ -84,51 +84,41 @@ class _PersonalNameScreenState extends State<PersonalNameScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Titre dynamique (Etape 1 ou Etape 2)
+                        // Titre dynamique
                         Text(
                           _isSubmitted
                               ? 'Bienvenue\n${_nameController.text}'
                               : 'Comment vous\nappelez-vous ?',
-                          style: GoogleFonts.lexend(
-                            fontSize: 28,
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.primaryNavyBlue,
-                            height: 1.2,
+                          style: AppTextStyle.h1.copyWith(
+                            fontSize:
+                                32, // Utilisation de H1 mais taille spécifique pour ce titre
+                            height: 1.15,
                           ),
                         ),
                         const SizedBox(height: 12),
                         Text(
                           'Vous pouvez utiliser un pseudo.',
-                          style: GoogleFonts.lexend(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
+                          style: AppTextStyle.body1.copyWith(
                             color: AppColors.primaryNavyBlue.withValues(
                               alpha: 0.6,
                             ),
                           ),
                         ),
-                        const SizedBox(height: 32),
-
-                        // Formulaire ou Vue d'avatar selon l'état
+                        const SizedBox(
+                          height: 32,
+                        ), // Espace avant l'input/avatar
+                        // Input ou Vue avatar/prénom
                         if (!_isSubmitted)
                           TextField(
                             controller: _nameController,
                             autofocus: true,
-                            onSubmitted: (val) {
-                              if (val.trim().isNotEmpty) {
-                                setState(() => _isSubmitted = true);
-                              }
-                            },
-                            style: GoogleFonts.lexend(
-                              fontSize: 15,
-                              color: AppColors.primaryNavyBlue,
-                            ),
+                            style: AppTextStyle.input,
                             decoration: InputDecoration(
                               hintText: 'ex : Alex',
-                              hintStyle: GoogleFonts.lexend(
-                                color: AppColors.primaryNavyBlue.withValues(
-                                  alpha: 0.3,
-                                ),
+                              hintStyle: AppTextStyle.input.copyWith(
+                                color: const Color(
+                                  0xFF94A3B8,
+                                ), // Couleur de hint conforme au modèle
                               ),
                               filled: true,
                               fillColor: AppColors.primaryNavyBlue.withValues(
@@ -143,11 +133,16 @@ class _PersonalNameScreenState extends State<PersonalNameScreen> {
                                 borderSide: BorderSide.none,
                               ),
                             ),
+                            onSubmitted: (val) {
+                              if (val.trim().isNotEmpty) {
+                                setState(() => _isSubmitted = true);
+                              }
+                            },
                           )
                         else
                           Row(
                             children: [
-                              // Avatar rond jaune
+                              // Avatar circulaire jaune avec initiale
                               Container(
                                 width: 48,
                                 height: 48,
@@ -160,20 +155,18 @@ class _PersonalNameScreenState extends State<PersonalNameScreen> {
                                   _nameController.text.isNotEmpty
                                       ? _nameController.text[0].toUpperCase()
                                       : 'Z',
-                                  style: GoogleFonts.lexend(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w700,
-                                    color: AppColors.yellowB40,
+                                  style: AppTextStyle.h3.copyWith(
+                                    color: AppColors.yellowB20,
                                   ),
                                 ),
                               ),
                               const SizedBox(width: 12),
-                              // Champ de texte contenant le nom
+                              // Champ affichant le nom saisi
                               Expanded(
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 20,
-                                    vertical: 14,
+                                    vertical: 16,
                                   ),
                                   decoration: BoxDecoration(
                                     color: AppColors.primaryNavyBlue.withValues(
@@ -183,10 +176,8 @@ class _PersonalNameScreenState extends State<PersonalNameScreen> {
                                   ),
                                   child: Text(
                                     _nameController.text,
-                                    style: GoogleFonts.lexend(
-                                      fontSize: 15,
+                                    style: AppTextStyle.input.copyWith(
                                       fontWeight: FontWeight.w500,
-                                      color: AppColors.primaryNavyBlue,
                                     ),
                                   ),
                                 ),
@@ -198,7 +189,7 @@ class _PersonalNameScreenState extends State<PersonalNameScreen> {
                   ),
                 ),
 
-                // Bouton dynamique de validation (Apparaît à la saisie)
+                // Bouton Continuer aligné en bas à droite
                 if (_isSubmitted || _nameController.text.trim().isNotEmpty)
                   Align(
                     alignment: Alignment.bottomRight,
@@ -207,7 +198,9 @@ class _PersonalNameScreenState extends State<PersonalNameScreen> {
                         if (!_isSubmitted) {
                           setState(() => _isSubmitted = true);
                         } else {
-                          context.go('/signup');
+                          context.go(
+                            '/signup',
+                          ); // Redirige vers signup après validation du nom
                         }
                       },
                       style: ElevatedButton.styleFrom(
@@ -227,15 +220,15 @@ class _PersonalNameScreenState extends State<PersonalNameScreen> {
                         children: [
                           Text(
                             'Continuer',
-                            style: GoogleFonts.lexend(
-                              fontSize: 14,
+                            style: AppTextStyle.buttonLinkMedium.copyWith(
                               fontWeight: FontWeight.w700,
                               color: AppColors.textOnYellow,
                             ),
                           ),
                           const SizedBox(width: 6),
                           const Icon(
-                            Iconsax.arrow_right_3, // Utilisation d'Iconsax
+                            Icons
+                                .chevron_right_rounded, // Utilisation de l'icône Flutter standard
                             size: 18,
                             color: AppColors.textOnYellow,
                           ),

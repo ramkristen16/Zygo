@@ -17,8 +17,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // Transition automatique vers l'onboarding après 3 secondes
-    Timer(const Duration(seconds: 3), () {
+    // Transition automatique vers l'onboarding après 5 secondes
+    Timer(const Duration(seconds: 5), () {
       if (mounted) {
         context.go('/onboarding');
       }
