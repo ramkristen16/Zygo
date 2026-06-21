@@ -38,7 +38,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   void _finishOnboarding() {
-    context.go('/signup');
+    // Redirection vers l'écran du prénom
+    context.go('/personal-name');
   }
 
   @override
@@ -238,7 +239,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           const SizedBox(height: 20),
           Center(
             child: SvgPicture.asset(
-              'assets/image/onboarding3.svg',
+              'assets/image/logo.svg',
               height: screenHeight * 0.22,
               fit: BoxFit.contain,
             ),
@@ -358,7 +359,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             width: double.infinity,
             height: 48,
             child: ElevatedButton(
-              onPressed: () => context.go('/signup'),
+              onPressed: () => context.go('/personal-name'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: AppColors.textOnYellow,
@@ -401,7 +402,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             width: double.infinity,
             height: 48,
             child: OutlinedButton(
-              onPressed: () => context.go('/signup'),
+              onPressed: () => context.go('/personal-name'),
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(color: AppColors.primary, width: 2),
                 shape: RoundedRectangleBorder(

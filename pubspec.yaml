@@ -17,6 +17,7 @@ dependencies:
   flutter_svg: ^2.3.0
   iconsax_plus: ^1.0.0
   iconsax_flutter: ^1.0.1
+  iconsax: ^0.0.8
 
 dev_dependencies:
   flutter_test:
@@ -29,7 +30,6 @@ flutter:
     - assets/image/logo.svg
     - assets/image/onboarding1.svg
     - assets/image/onboarding2.svg
-    - assets/image/onboarding3.svg
     - assets/fonts/Lexend-Black.ttf
     - assets/fonts/Lexend-Bold.ttf
     - assets/fonts/Lexend-ExtraBold.ttf
