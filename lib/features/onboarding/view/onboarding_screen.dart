@@ -145,8 +145,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         children: [
           const SizedBox(height: 20),
           Center(
-            child: Image.asset(
-              'assets/image/onboarding1.png',
+            child: SvgPicture.asset(
+              'assets/image/onboarding1.svg',
               height: screenHeight * 0.25,
               fit: BoxFit.contain,
             ),
@@ -185,8 +185,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         children: [
           const SizedBox(height: 20),
           Center(
-            child: Image.asset(
-              'assets/image/onboarding2.png',
+            child: SvgPicture.asset(
+              'assets/image/onboarding2.svg',
               height: screenHeight * 0.25,
               fit: BoxFit.contain,
             ),
@@ -237,8 +237,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         children: [
           const SizedBox(height: 20),
           Center(
-            child: Image.asset(
-              'assets/image/onboarding3.png',
+            child: SvgPicture.asset(
+              'assets/image/onboarding3.svg',
               height: screenHeight * 0.22,
               fit: BoxFit.contain,
             ),

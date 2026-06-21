@@ -27,9 +27,9 @@ flutter:
   uses-material-design: true
   assets:
     - assets/image/logo.svg
-    - assets/image/onboarding1.png
-    - assets/image/onboarding2.png
-    - assets/image/onboarding3.png
+    - assets/image/onboarding1.svg
+    - assets/image/onboarding2.svg
+    - assets/image/onboarding3.svg
     - assets/fonts/Lexend-Black.ttf
     - assets/fonts/Lexend-Bold.ttf
     - assets/fonts/Lexend-ExtraBold.ttf
