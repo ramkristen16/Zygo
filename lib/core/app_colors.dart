@@ -35,7 +35,7 @@ class AppColors {
   static const Color lightBlue = Color(0xFFEDF3FA);
   static const Color blueL80 = Color(0xFFD9E6F4);
   static const Color inputContourBlue = Color(0xFFB2CCE8);
-  static final Color headerOverlay = Colors.white.withOpacity(0.5);
+  static final Color headerOverlay = Colors.white.withValues(alpha: 0.5);
 
   //  Neutres
   static const Color primaryNavyBlue = Color(0xFF1E293B);
@@ -45,7 +45,9 @@ class AppColors {
 
   // Dégradé pastel du Splash Screen , Onboarding
 
-  static const Color splashGradientStart = Color(0xFFF7E6F2); // rose/lavande pâle
+  static const Color splashGradientStart = Color(
+    0xFFF7E6F2,
+  ); // rose/lavande pâle
   static const Color splashGradientMid = Color(0xFFFFF6DE); // jaune très pâle
   static const Color splashGradientEnd = Color(0xFFFFFEF7); // crème (bgYellow)
 }

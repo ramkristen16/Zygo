@@ -1,10 +1,10 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../core/appColors.dart';
-import '../../core/appTextStyles.dart';
-
+import 'package:google_fonts/google_fonts.dart';
+// pb de nommenclatre
+import '../../../core/app_colors.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -17,7 +17,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
+    // Transition automatique vers l'onboarding après 3 secondes
+    Timer(const Duration(seconds: 3), () {
       if (mounted) {
         context.go('/onboarding');
       }
@@ -47,17 +48,25 @@ class _SplashScreenState extends State<SplashScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 40.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // Logo
                 SvgPicture.asset(
                   'assets/image/logo.svg',
-                  width: 230,
+                  width: 220,
                   fit: BoxFit.contain,
+                  placeholderBuilder: (context) =>
+                      const SizedBox(height: 200, width: 200),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 24),
+                // Slogan
                 Text.rich(
                   TextSpan(
-                    style: AppTextStyle.h3.copyWith(
+                    style: GoogleFonts.lexend(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w700,
                       color: AppColors.primaryNavyBlue,
+                      letterSpacing: -0.5,
                     ),
                     children: [
                       const TextSpan(text: 'Go '),
