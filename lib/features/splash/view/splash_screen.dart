@@ -1,10 +1,11 @@
-import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
-// pb de nommenclatre
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../../core/app_colors.dart';
+import '../../../core/app_text_styles.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -17,12 +18,35 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // Transition automatique vers l'onboarding après 5 secondes
-    Timer(const Duration(seconds: 5), () {
-      if (mounted) {
-        context.go('/onboarding');
-      }
-    });
+    _decide();
+  }
+
+  Future<void> _decide() async {
+    await Future.delayed(const Duration(seconds: 5));
+
+    if (!mounted) return;
+
+    final user = FirebaseAuth.instance.currentUser;
+
+    // Utilisateur déjà connecté ,  Home directement
+    if (user != null) {
+      context.go('/home');
+      return;
+    }
+
+    // Vérifie si l'onboarding a déjà été vu
+    final prefs = await SharedPreferences.getInstance();
+    final onboardingDone = prefs.getBool('onboardingDone') ?? false;
+
+    if (!mounted) return;
+
+    if (onboardingDone) {
+      // A déjà utilisé l'app , Login directement
+      context.go('/login');
+    } else {
+      // Première ouverture , Onboarding depuis la page 1
+      context.go('/onboarding');
+    }
   }
 
   @override
@@ -48,33 +72,24 @@ class _SplashScreenState extends State<SplashScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 40.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Logo
                 SvgPicture.asset(
                   'assets/image/logo.svg',
-                  width: 220,
+                  width: 230,
                   fit: BoxFit.contain,
-                  placeholderBuilder: (context) =>
-                      const SizedBox(height: 200, width: 200),
                 ),
-                const SizedBox(height: 24),
-                // Slogan
+                const SizedBox(height: 20),
                 Text.rich(
                   TextSpan(
-                    style: GoogleFonts.lexend(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
+                    style: AppTextStyle.h3.copyWith(
                       color: AppColors.primaryNavyBlue,
-                      letterSpacing: -0.5,
                     ),
                     children: [
-                      const TextSpan(text: 'Go '),
+                      const TextSpan(text: 'Même trajet, '),
                       TextSpan(
-                        text: 'easily',
+                        text: 'facilement.',
                         style: TextStyle(color: AppColors.primary),
                       ),
-                      const TextSpan(text: ' together'),
                     ],
                   ),
                   textAlign: TextAlign.center,

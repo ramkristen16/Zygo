@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/app_colors.dart';
 import '../../../core/app_text_styles.dart';
+import '../view_model/auth_view_model.dart';
 
 class PersonalNameScreen extends StatefulWidget {
   const PersonalNameScreen({super.key});
@@ -15,17 +16,13 @@ class PersonalNameScreen extends StatefulWidget {
 }
 
 class _PersonalNameScreenState extends State<PersonalNameScreen> {
-  final TextEditingController _nameController = TextEditingController();
   bool _isSubmitted = false;
 
   @override
-  void dispose() {
-    _nameController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final vm = context.watch<AuthViewModel>();
+    final nameController = vm.nameController;
+
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -51,7 +48,6 @@ class _PersonalNameScreenState extends State<PersonalNameScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // En-tête avec flèche retour Iconsax et logo
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -60,7 +56,7 @@ class _PersonalNameScreenState extends State<PersonalNameScreen> {
                         if (_isSubmitted) {
                           setState(() => _isSubmitted = false);
                         } else {
-                          context.go('/onboarding');
+                          context.go('/signup');
                         }
                       },
                       icon: const Icon(
@@ -76,7 +72,7 @@ class _PersonalNameScreenState extends State<PersonalNameScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 32), // Espace après l'en-tête
+                const SizedBox(height: 32),
 
                 Expanded(
                   child: SingleChildScrollView(
@@ -84,14 +80,12 @@ class _PersonalNameScreenState extends State<PersonalNameScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Titre dynamique
                         Text(
                           _isSubmitted
-                              ? 'Bienvenue\n${_nameController.text}'
+                              ? 'Bienvenue\n${nameController.text}'
                               : 'Comment vous\nappelez-vous ?',
                           style: AppTextStyle.h1.copyWith(
-                            fontSize:
-                                32, // Utilisation de H1 mais taille spécifique pour ce titre
+                            fontSize: 32,
                             height: 1.15,
                           ),
                         ),
@@ -99,31 +93,23 @@ class _PersonalNameScreenState extends State<PersonalNameScreen> {
                         Text(
                           'Vous pouvez utiliser un pseudo.',
                           style: AppTextStyle.body1.copyWith(
-                            color: AppColors.primaryNavyBlue.withValues(
-                              alpha: 0.6,
-                            ),
+                            color: AppColors.primaryNavyBlue.withValues(alpha: 0.6),
                           ),
                         ),
-                        const SizedBox(
-                          height: 32,
-                        ), // Espace avant l'input/avatar
-                        // Input ou Vue avatar/prénom
+                        const SizedBox(height: 32),
+
                         if (!_isSubmitted)
                           TextField(
-                            controller: _nameController,
+                            controller: nameController, // ← vm.nameController
                             autofocus: true,
                             style: AppTextStyle.input,
                             decoration: InputDecoration(
                               hintText: 'ex : Alex',
                               hintStyle: AppTextStyle.input.copyWith(
-                                color: const Color(
-                                  0xFF94A3B8,
-                                ), // Couleur de hint conforme au modèle
+                                color: const Color(0xFF94A3B8),
                               ),
                               filled: true,
-                              fillColor: AppColors.primaryNavyBlue.withValues(
-                                alpha: 0.05,
-                              ),
+                              fillColor: AppColors.primaryNavyBlue.withValues(alpha: 0.05),
                               contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 20,
                                 vertical: 16,
@@ -142,7 +128,6 @@ class _PersonalNameScreenState extends State<PersonalNameScreen> {
                         else
                           Row(
                             children: [
-                              // Avatar circulaire jaune avec initiale
                               Container(
                                 width: 48,
                                 height: 48,
@@ -152,8 +137,8 @@ class _PersonalNameScreenState extends State<PersonalNameScreen> {
                                 ),
                                 alignment: Alignment.center,
                                 child: Text(
-                                  _nameController.text.isNotEmpty
-                                      ? _nameController.text[0].toUpperCase()
+                                  nameController.text.isNotEmpty
+                                      ? nameController.text[0].toUpperCase()
                                       : 'Z',
                                   style: AppTextStyle.h3.copyWith(
                                     color: AppColors.yellowB20,
@@ -161,7 +146,6 @@ class _PersonalNameScreenState extends State<PersonalNameScreen> {
                                 ),
                               ),
                               const SizedBox(width: 12),
-                              // Champ affichant le nom saisi
                               Expanded(
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(
@@ -169,13 +153,11 @@ class _PersonalNameScreenState extends State<PersonalNameScreen> {
                                     vertical: 16,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: AppColors.primaryNavyBlue.withValues(
-                                      alpha: 0.05,
-                                    ),
+                                    color: AppColors.primaryNavyBlue.withValues(alpha: 0.05),
                                     borderRadius: BorderRadius.circular(16),
                                   ),
                                   child: Text(
-                                    _nameController.text,
+                                    nameController.text,
                                     style: AppTextStyle.input.copyWith(
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -184,23 +166,34 @@ class _PersonalNameScreenState extends State<PersonalNameScreen> {
                               ),
                             ],
                           ),
+
+                        // Erreur éventuelle
+                        if (vm.errorMessage != null)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 12),
+                            child: Text(
+                              vm.errorMessage!,
+                              style: AppTextStyle.label.copyWith(
+                                color: Colors.redAccent,
+                              ),
+                            ),
+                          ),
                       ],
                     ),
                   ),
                 ),
 
-                // Bouton Continuer aligné en bas à droite
-                if (_isSubmitted || _nameController.text.trim().isNotEmpty)
+                if (_isSubmitted || nameController.text.trim().isNotEmpty)
                   Align(
                     alignment: Alignment.bottomRight,
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: vm.isLoading
+                          ? null
+                          : () {
                         if (!_isSubmitted) {
                           setState(() => _isSubmitted = true);
                         } else {
-                          context.go(
-                            '/signup',
-                          ); // Redirige vers signup après validation du nom
+                          vm.saveName(context);
                         }
                       },
                       style: ElevatedButton.styleFrom(
@@ -215,7 +208,16 @@ class _PersonalNameScreenState extends State<PersonalNameScreen> {
                           borderRadius: BorderRadius.circular(16),
                         ),
                       ),
-                      child: Row(
+                      child: vm.isLoading
+                          ? const SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: AppColors.textOnYellow,
+                        ),
+                      )
+                          : Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
@@ -227,8 +229,7 @@ class _PersonalNameScreenState extends State<PersonalNameScreen> {
                           ),
                           const SizedBox(width: 6),
                           const Icon(
-                            Icons
-                                .chevron_right_rounded, // Utilisation de l'icône Flutter standard
+                            Icons.chevron_right_rounded,
                             size: 18,
                             color: AppColors.textOnYellow,
                           ),

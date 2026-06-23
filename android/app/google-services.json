@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "647271817227",
+    "project_id": "covoiturage-zygo",
+    "storage_bucket": "covoiturage-zygo.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:647271817227:android:2d7681f3571b906679e70e",
+        "android_client_info": {
+          "package_name": "com.example.untitled"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "647271817227-jgfr1ugmc6i15n4abt01q70mnqs4f4q1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.untitled",
+            "certificate_hash": "85466dfa22121265c91f85183e794aa6a53810a3"
+          }
+        },
+        {
+          "client_id": "647271817227-9lcj2jqk6lh7qrh77vaestql4tdk852e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAIPh_M6CR0VjEsWSzampI_CYmU5rMOYA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "647271817227-9lcj2jqk6lh7qrh77vaestql4tdk852e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "647271817227-k6dfth9b80cgsiqgbccmngmo9e4q0t03.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.untitled"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
