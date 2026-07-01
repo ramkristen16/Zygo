@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../models/user_model.dart';
+import '../../../shared/models/user_model.dart';
 
 class AuthRepository {
   final FirebaseAuth _auth;
@@ -89,7 +89,7 @@ class AuthRepository {
 
     final userCredential = await _auth.signInWithCredential(credential);
     final uid = userCredential.user!.uid;
-  //si google donc on entre plsu le profilName mais automatiquement ,il prend le nom de l'email géré par firestore
+  //si google donc on entre plus le profilName mais automatiquement ,il prend le nom de l'email géré par firestore
     final doc = await _firestore.collection('users').doc(uid).get();
     if (doc.exists && doc.data() != null) {
       return UserModel.fromMap(uid, doc.data()!);

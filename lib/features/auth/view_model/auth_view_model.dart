@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/user_model.dart';
+import '../../../shared/models/user_model.dart';
 import '../repository/auth_repository.dart';
 
 enum AuthStatus { idle, loading, success, error }
@@ -54,6 +54,7 @@ class AuthViewModel extends ChangeNotifier {
   //creer un compte sur firebase
 
   Future<void> createAccount(BuildContext context) async {
+
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
     final confirm = confirmPasswordController.text.trim();
@@ -194,6 +195,10 @@ class AuthViewModel extends ChangeNotifier {
   //redirection
   void _navigateAfterAuth(BuildContext context) {
     final user = _currentUser!;
+    debugPrint('isDriver: ${user.isDriver}');
+    debugPrint('driverProfileComplete: ${user.driverProfileComplete}');
+    debugPrint('roles: ${user.roles}');
+
     if (user.isDriver && !user.driverProfileComplete) {
       context.go('/driver-profile');
     } else {
@@ -214,7 +219,6 @@ class AuthViewModel extends ChangeNotifier {
     if (e is FirebaseAuthException) {
       _setError(_mapFirebaseError(e.code));
     } else {
-      // Web : FirebaseAuthException arrive parfois comme objet JS
       final msg = e.toString();
       if (msg.contains('email-already-in-use')) {
         _setError(_mapFirebaseError('email-already-in-use'));

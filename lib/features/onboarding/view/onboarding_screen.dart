@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../../core/app_colors.dart';
 import '../../../core/app_text_styles.dart';
-import '../../auth/models/user_model.dart';
+import '../../../shared/models/user_model.dart';
 import '../../auth/view_model/auth_view_model.dart';
 import '../view_model/onboarding_view_model.dart';
 
@@ -205,7 +205,7 @@ class _OnboardingBody extends StatelessWidget {
   }
 
   Widget _buildFooter(BuildContext context, OnboardingViewModel ovm) {
-    // ← On récupère AuthViewModel pour selectRole
+    //  On récupère AuthViewModel pour selectRole
     final authVm = context.read<AuthViewModel>();
 
     if (ovm.currentPage < 2) {
@@ -255,13 +255,11 @@ class _OnboardingBody extends StatelessWidget {
         ],
       );
     }
-
-    // Page 3 — boutons Passager / Conducteur
+//Conducteur ou passager
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        // ← CHANGEMENT CLÉ : selectRole() stocke le rôle dans AuthViewModel
-        //   puis navigue vers /signup automatiquement
+
         SizedBox(
           width: double.infinity,
           height: 48,
